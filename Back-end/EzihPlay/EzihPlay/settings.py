@@ -11,6 +11,12 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from datetime import timedelta
+from dotenv import load_dotenv
+from urllib.parse import urlparse
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +26,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2kgp_y#ei6tg&6wuko(z*39$cy48ofo@-ko_7u+bw-2urw10&0'
+SECRET_KEY = os.getenv("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv("DEBUG")
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [os.getenv("ALLOWED_HOSTS")]
 
 
 # Application definition
@@ -37,6 +43,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    "rest_framework",
+    "corsheaders",
+    "django_filters",
+    # App
+    "post",
 ]
 
 MIDDLEWARE = [
@@ -47,6 +58,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #corshader
+     'corsheaders.middleware.CorsMiddleware',
+    # whitenoise 
+     'whitenoise.middleware.WhiteNoiseMiddleware', 
 ]
 
 ROOT_URLCONF = 'EzihPlay.urls'
@@ -72,23 +87,33 @@ WSGI_APPLICATION = 'EzihPlay.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
+tmpPostgres = urlparse(os.getenv("DATABASE_URL"))
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': tmpPostgres.path.replace('/', ''),  # Extracts DB name
+        'USER': tmpPostgres.username,  # Extracts username
+        'PASSWORD': tmpPostgres.password,  # Extracts password
+        'HOST': tmpPostgres.hostname,  # Extracts hostname
+        'PORT': 5432,  # PostgreSQL default port
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS': { 'min_length': 10 }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -98,6 +123,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Add your frontend URL
+]
+
+CORS_ALLOW_ALL_ORIGINS = True  # Allows all origins
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -110,11 +141,28 @@ USE_I18N = True
 
 USE_TZ = True
 
+REST_FRAMEWORK = {
+    # ... your other DRF settings
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+}
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / "madia"
+
+# For development, use the following to collect static files
+if DEBUG:
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+else:
+    STATICFILES_DIRS = []
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
