@@ -1,5 +1,8 @@
+import uuid
 from django.db import models
 from django.conf import settings
+from django.contrib.auth.models import User
+
 
 class Category(models.Model):
     title = models.CharField(max_length=100, unique=True)
@@ -74,3 +77,27 @@ class PostReview(models.Model):
 
     def __str__(self):
         return f'Review by {self.user} for {self.post} - {self.rating} stars'
+    
+
+class userInfo(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="userInfo")  
+    bio = models.TextField(blank=True, null=True)  
+    profile_picture = models.ImageField(blank=True, null=True, upload_to='profile_pictures/')  
+    joined_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
+    uuid = models.UUIDField(default=uuid.uuid4, editable=False,unique=True)
+    is_verified = models.BooleanField(blank=True, null=True, default=False)
+    phone_number = models.CharField(max_length=20, blank=True, null=True)
+    location = models.TextField(blank=True, null=True)
+    date_of_birth = models.DateField(blank=True, null=True)
+    gender = models.CharField(max_length=10, choices=[('Male', 'Male'), ('Female', 'Female'), ('Other', 'Other')], blank=True, null=True)
+    preferred_language = models.CharField(max_length=50, blank=True, null=True)
+    
+    class Meta:
+        verbose_name = "User Information"
+        verbose_name_plural = "User Information"
+
+    def __str__(self):
+        return f"{self.user.username} - {self.uuid}"
+    def is_superuser(self):
+        return self.user.is_superuser
+

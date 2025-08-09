@@ -20,6 +20,12 @@ Whether it’s traditional Ethiopian melodies, Afrobeat, or global hits, EzihPla
 * **`POST /api-v1/token/refresh/`** → Refresh JWT token
 * **`POST /api-v1/register/`** → To sign up
 
+### User Endpoints
+
+* **`POST /api-v1/users/`** → List users
+* **`POST /api-v1/users/{uuid}`** → Get user details
+
+
 ## Post
 * **`GET /api-v1/posts/`** → List all  posts
 * **`GET /api-v1/posts/?search=keyword`** → searching by title and description
@@ -89,6 +95,24 @@ Whether it’s traditional Ethiopian melodies, Afrobeat, or global hits, EzihPla
     "rating": null,
     "comment": ""
 }
+```
+
+### Users Info 👤
+
+```json
+{
+    "user": null,
+    "bio": "",
+    "profile_picture": null,
+    "is_verified": false,
+    "phone_number": "",
+    "location": "",
+    "date_of_birth": "YYYY-MM-DD",
+    "gender": "Male | Female | Other",
+    "education": "",
+    "preferred_language": "en | am | etc."
+}
+
 ```
 
 
