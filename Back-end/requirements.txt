@@ -1,0 +1,16 @@
+Django
+djangorestframework
+psycopg2-binary
+djangorestframework-simplejwt
+django-cors-headers
+dj_database_url
+Pillow
+setuptools>=65.0
+wheel>=0.38.4
+dotenv
+Procfile
+waitress
+gunicorn
+whitenoise
+drf-spectacular
+django-filter
