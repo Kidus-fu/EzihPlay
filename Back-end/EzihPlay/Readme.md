@@ -7,7 +7,7 @@ Whether it’s traditional Ethiopian melodies, Afrobeat, or global hits, EzihPla
 
 
 
-* RESTful APIs to perform CRUD operations on notes and user data
+* RESTful APIs to perform CRUD operations on post and user data
 * Authentication & Authorization using token-based JWT access control
 * Error Handling & Validation to ensure data integrity
 * Deployment Instructions for running the backend on production servers in render.com
