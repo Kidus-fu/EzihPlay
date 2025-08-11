@@ -1,3 +1,5 @@
+import PDF from "../../public/Ezihplay presentation.pdf"
+
 const DeveloperCode = () => {
   return (
     <section className="px-4 py-20 w-full flex justify-center bg-gray-200 ">
@@ -32,7 +34,7 @@ const DeveloperCode = () => {
           </p>
 
           {/* GitHub Link */}
-          <div className="mt-8">
+          <div className="mt-8 gap-2">
             <a
               href="https://github.com/Kidus-fu/EzihPlay"
               target="_blank"
@@ -40,6 +42,15 @@ const DeveloperCode = () => {
               className="bg-orange-500 hover:bg-orange-600 text-black px-6 py-3 font-semibold rounded shadow-lg transition"
             >
               View on GitHub
+            </a>
+            <a
+              href={PDF}
+              download={'Ezihplay presentation.pdf'}
+              rel="noopener noreferrer"
+              
+              className="cursor-pointer bg-orange-500 ms-2 hover:bg-orange-600 text-black px-6 py-3 font-semibold rounded shadow-lg transition"
+            >
+              Download Pdf 
             </a>
           </div>
         </div>
