@@ -7,6 +7,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import store from './store/store.js'
 import LoginPage from '../Pages/Auth/LoginPage.jsx'
 import SignUpPage from '../Pages/Auth/SignupPage.jsx'
+import DevelopersPage from '../Pages/landing/DevelopersPage.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -16,6 +17,7 @@ createRoot(document.getElementById('root')).render(
           <Route path="/" element={<App />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/signup" element={<SignUpPage />} />
+          <Route path="/developerOptions" element={<DevelopersPage />} />
         </Routes>
       </Provider>
     </BrowserRouter>

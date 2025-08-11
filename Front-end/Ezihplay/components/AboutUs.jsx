@@ -47,6 +47,12 @@ const AboutUS = () => {
           <h3 className="mb-4 text-3xl md:text-4xl font-bold section-title text-gray-900">
             Connecting People Through the Language of Music
           </h3>
+          <motion.div
+          initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+          >
           <p className="mb-8 max-w-3xl mx-auto text-gray-600 leading-relaxed">
             EzihPlay is a community-driven platform where music lovers can share,
             discover, and review playlists from YouTube, Spotify, and more.
@@ -55,6 +61,7 @@ const AboutUS = () => {
             Whether you want to share your favorite playlist or explore something new,
             EzihPlay connects you with people who feel the music just like you do.
           </p>
+          </motion.div>
         </div>
 
         {/* Stats */}
