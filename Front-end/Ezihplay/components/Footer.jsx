@@ -46,10 +46,10 @@ const Footer = () => {
                 </div>
             </div>
             <div
-                className="absolute top-0 right-0 z-0 h-1/2 w-1/6 blur-3xl bg-gray-200"
+                className="sm:absolute hidden top-0 right-0 z-0 h-1/2 w-1/6 blur-3xl bg-gray-200"
             />
             <div
-                className="absolute bottom-0 left-0 z-0 h-1/2 w-1/6  blur-2xl bg-gray-200"
+                className="absolute bottom-0 left-0 z-0 sm:h-1/2 sm:w-1/6 w-0 h-0 blur-2xl bg-gray-200"
             />
         </footer>
     );
