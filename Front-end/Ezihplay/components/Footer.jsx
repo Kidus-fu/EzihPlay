@@ -38,7 +38,7 @@ const Footer = () => {
                         <a href="https://www.linkedin.com/in/kidus-surafel/" target="_blank" rel="noopener noreferrer" className="text-blue-800">
                             <LinkedinFilled />
                         </a>
-                        <a href="https://www.memoethiopia.pro.et/" className="text-blue-500">
+                        <a href="https://ezih-play.vercel.app/" className="text-blue-500">
                             <GlobalOutlined />
                         </a>
                     </div>
