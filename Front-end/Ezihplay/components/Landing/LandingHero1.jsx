@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 const LandingHero1 = () => {
     return (
         <>
@@ -13,10 +15,10 @@ const LandingHero1 = () => {
                             <p className="text-sm md:text-base text-gray-50 mb-4">
                                 is a community-driven platform where music lovers can share, discover, and review playlists from YouTube, Spotify, and other streaming services.
                             </p>
-                            <a href="#"
+                            <Link to={"/signup"}
                                 className="bg-transparent hover:bg-orange-500 text-orange-500 hover:text-black rounded shadow hover:shadow-lg py-2 px-4 border border-orange-500 hover:border-transparent transition-all delay-100">
                                 Get Started
-                            </a>
+                            </Link>
                         </div>
 
                         <div className="p-8 mt-12 mb-6 md:mb-0 md:mt-0 ml-0 md:ml-12 lg:w-2/3  justify-center">
